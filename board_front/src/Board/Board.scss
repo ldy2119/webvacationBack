@@ -1,0 +1,47 @@
+.board-list-item{
+  display : table;
+  border-bottom : 1px solid silver;
+  cursor: pointer;
+
+  &:hover{
+    background-color: #aaaaaa;
+  }
+
+  > div{
+    display : table-cell;
+    width : 100px;
+
+    &:first-child{
+      width : 200px;
+    }
+  }
+}
+
+.board-info
+{
+  background-color: silver;
+  border: 1px solid black;
+}
+
+.board-title
+{
+  width : 200px;
+  display:inline-block;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  text-align: center;
+}
+
+.board-other
+{
+  width : 100px;
+  display:inline-block;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  text-align: center;
+}
+
+.board-count
+{
+  margin-right: 10px;
+}

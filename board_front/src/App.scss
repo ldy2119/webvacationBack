@@ -1,0 +1,40 @@
+.app-header
+{
+  background-color: cadetblue;
+  position:fixed;
+  left:0;
+  right:0;
+  height: 50px;
+  .menu-bar
+  {
+    list-style-type: none;
+    li
+    {
+      float:left;
+      a
+      {
+        color:white;
+        text-decoration: none;
+        padding: 16px;
+        display: block;
+        border-bottom: 3px solid transparent;
+        &:hover
+        {
+          color : yellow;
+          border-bottom: 3px solid yellow;
+        }
+      }
+    }
+  }
+}
+
+.app-body
+{
+  position:absolute;
+  top:50px;
+}
+
+.listStyle
+{
+  border-bottom: 1px solid black;
+}

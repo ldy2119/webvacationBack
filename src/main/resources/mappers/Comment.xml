@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.hs.dgsw.webshoppingmall.Domain.CommentMapper">
+    <select id="findById" parameterType="Long"
+            resultType="kr.hs.dgsw.webshoppingmall.Domain.Comment">
+        select id, userId, postId, content, created, updated
+        from comment where id=#{id}
+    </select>
+
+    <insert id="add" parameterType="kr.hs.dgsw.webshoppingmall.Domain.Comment">
+        insert into comment(userId, postId, content)
+        values(#{userId}, #{postId}, #{content})
+        <selectKey keyProperty="id" resultType="Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="modify" parameterType="kr.hs.dgsw.webshoppingmall.Domain.Comment">
+        update comment set content=#{content}
+                where id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Long">
+        delete from comment where id=#{id}
+    </delete>
+
+    <select id="findAll" resultType="HashMap">
+        select id, userId, postId, content, created, updated
+        from comment
+    </select>
+
+    <select id="findByPostId" parameterType="Long"
+            resultType="kr.hs.dgsw.webshoppingmall.Domain.Comment">
+        select id, userId, postId, content, created, updated
+        from comment where postId=#{postId}
+    </select>
+
+    <select id="findByUserId" parameterType="Long"
+            resultType="kr.hs.dgsw.webshoppingmall.Domain.Comment">
+        select id, userId, postId, content, created, updated
+        from comment where userId=#{userId}
+    </select>
+</mapper>

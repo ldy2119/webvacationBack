@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.hs.dgsw.webshoppingmall.Domain.PostMapper">
+    <select id="findById" parameterType="Long"
+            resultType="kr.hs.dgsw.webshoppingmall.Domain.Post">
+        select id, userId, title, content, created, updated, boardId, recommendedCount, showCount
+        from post where id=#{id}
+    </select>
+
+    <insert id="add" parameterType="kr.hs.dgsw.webshoppingmall.Domain.Post">
+        insert into post(userId, title, content, boardId, recommendedCount, showCount)
+        values(#{userId}, #{title}, #{content}, #{boardId}, 0, 0)
+        <selectKey keyProperty="id" resultType="Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="modify" parameterType="kr.hs.dgsw.webshoppingmall.Domain.Post">
+        update post set title=#{title}, content=#{content}
+                where id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Long">
+        delete from post where id=#{id}
+    </delete>
+
+    <select id="findAll" resultType="HashMap">
+        select id, userId, title, content, created, updated, boardId, recommendedCount, showCount
+        from post
+    </select>
+
+    <select id="findByUserId" parameterType="Long" resultType="HashMap">
+        select id, userId, title, content, created, updated, boardId, recommendedCount, showCount
+        from post
+        where userId = #{userId}
+    </select>
+
+    <select id="findByBoardId" parameterType="Long" resultType="HashMap">
+        select id, userId, title, content, created, updated, boardId, recommendedCount, showCount
+        from post
+        where boardId = #{boardId}
+    </select>
+
+    <select id="findCurrentPostByBoardId" parameterType="Long" resultType="HashMap">
+        select id, userId, title, content, created, updated, boardId, recommendedCount, showCount
+        from post
+        where boardId = #{boardId}
+        order by created desc
+        limit 5
+    </select>
+
+    <select id="findByPageNumber" parameterType="Long" resultType="HashMap">
+        select id, userId, title, content, created, updated, boardId, recommendedCount, showCount
+        from post
+        where boardId = #{boardId}
+        order by created desc
+        limit #{pageNumber}, #{amountPost}
+    </select>
+
+    <update id="addShowCount" parameterType="Long">
+        update post set showCount = (showCount+1)
+                where id=#{id}
+    </update>
+
+    <update id="addRecommendCount" parameterType="Long">
+        update post set recommendedCount = (recommendedCount+1)
+                where id=#{id}
+    </update>
+
+
+    <select id="getCount" resultType="integer">
+        select count(*) from post where boardId=#{boardId}
+    </select>
+
+</mapper>
